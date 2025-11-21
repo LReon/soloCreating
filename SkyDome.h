@@ -1,9 +1,8 @@
 #pragma once
 #include <KamataEngine.h>
-
 using namespace KamataEngine;
 
-class Player {
+class SkyDome {
 
 public:
 	// 初期化
@@ -13,16 +12,12 @@ public:
 	// 描画
 	void Draw();
 
-	// キーボード入力
-	Input* input_ = nullptr;
-
-	
-
 private:
-	WorldTransform worldTransform;
-
+	// モデル
 	Model* model_ = nullptr;
+	// ワールド変換情報
+	WorldTransform worldTransform_;
+	
+	Camera* camera_ = nullptr;
 
-	// カメラ
-	Camera* camera_;
 };
