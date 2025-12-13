@@ -38,15 +38,19 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 		// 描画終了
 		dxCommon->PostDraw();
 	
+		if (Input::GetInstance()->TriggerKey(DIK_ESCAPE)) {
+			break;
+		}
 	}
 
-	// ゲームシーンの解放
-	delete gameScene;
-	// nullptrの代入
-	gameScene = nullptr;
-
-	// エンジンの終了処理
-	KamataEngine::Finalize();
-
+	
+		// ゲームシーンの解放
+		delete gameScene;
+		// nullptrの代入
+		gameScene = nullptr;
+	
+		// エンジンの終了処理
+		KamataEngine::Finalize();
 	return 0;
+	
 }
