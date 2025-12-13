@@ -1,6 +1,6 @@
 #include <Windows.h>
 #include "KamataEngine.h"
-#include "../DirectXGame/scene/GameScene.h"
+#include "GameScene.h"
 
 using namespace KamataEngine;
 
