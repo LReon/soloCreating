@@ -1,6 +1,4 @@
 #include "GameScene.h"
-
-
 // 初期化
 void GameScene::Initialize() {
 
@@ -21,7 +19,6 @@ void GameScene::Initialize() {
 
 }
 
-
 // 更新
 void GameScene::Update() { 
 	player_->Update();
@@ -41,5 +38,4 @@ void GameScene::Draw() {
 	player_->Draw();
 	enemy_->Draw();
 	Model::PostDraw();
-	
 }

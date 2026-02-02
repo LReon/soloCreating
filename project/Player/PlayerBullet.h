@@ -1,23 +1,15 @@
 #pragma once
 #include <KamataEngine.h>
-#include <list>
-#include "PlayerBullet.h"
-
 using namespace KamataEngine;
 
 /// <summary>
-/// プレイヤーの動きを司るクラス
+/// プレイヤーの弾の動きを司るクラス
 /// </summary>
-class Player {
+class PlayerBullet {
 
 public:
 	// 初期化
-	void Initialize(Camera* camera);
-
-	void Attack();
-	PlayerBullet* playerBullet_ = nullptr;
-	std::list<PlayerBullet*> playerBullets_;
-
+	void Initialize(Camera* camera,const Vector3& position,const Vector3& velocity);
 	// 更新
 	void Update();
 	// 描画
@@ -26,14 +18,20 @@ public:
 	// キーボード入力
 	Input* input_ = nullptr;
 
+	// 速度
+	Vector3 velocity_;
+
+	// 寿命
+	static const int32_t kLifeTime = 60;
+	// デスタイマー
+	int32_t deathTimer_ = kLifeTime;
+	// デスフラグ
+	bool isDead_ = false;
+
+	bool IsDead() const { return isDead_; }
 
 	// 衝突を検出したら呼び出されるコールバック
 	void OnCollision();
-	// 弾リストを取得
-	const std::list<PlayerBullet*>& GetBullets() const { return playerBullets_; }
-
-	~Player();
-	
 
 private:
 	WorldTransform worldTransform;

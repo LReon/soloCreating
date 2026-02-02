@@ -6,6 +6,9 @@
 
 using namespace KamataEngine;
 
+/// <summary>
+/// 各クラスをまとめて管理するクラス
+/// </summary>
 class GameScene {
 
 public:
@@ -30,5 +33,4 @@ private:
 
 	// カメラ
 	Camera* camera_;
-
 };

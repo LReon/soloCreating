@@ -18,30 +18,78 @@ void Enemy::Initialize(Camera* camera) {
 	
 }
 
+void Enemy::Fire() {
+	// 弾の速度
+	const float kBulletSpeed = -1.0f;
+	Vector3 velocity(kBulletSpeed, 0, 0);
+
+	EnemyBullet* newBullet = new EnemyBullet();
+	newBullet->Initialize(camera_, worldTransform.translation_, velocity);
+	enemyBullets_.push_back(newBullet);
+}
+
 // 更新
 void Enemy::Update() { 
 
-	// キー入力で移動パターンを切り替え
-	if (input_->TriggerKey(DIK_SPACE)) {
-		keyCount++;
-	}
-	if (keyCount == 1) {
+	// 敵のフェーズ
+	switch (phase_) { 
+		case Enemy::Phase::Circle:
 		CircleMove();
-	}
-	else if (keyCount == 2) {
+
+		break;
+
+		case Enemy::Phase::UpDown:
 		UpDownMove();
-	}
-	else if (keyCount == 3) {
+
+		break;
+
+		case Enemy::Phase::Infinite:
 		InfiniteMove();
-	} else if (keyCount > 3) {
-		keyCount = 1;
+
+		break;
+
 	}
+
+	if (input_->GetInstance()->TriggerKey(DIK_TAB)) {
+		count++;
+	}
+	
+	if (count == 2) {
+		phase_ = Phase::UpDown;
+	}
+	if (count == 3) {
+		phase_ = Phase::Infinite;
+	}
+	if (count == 4) {
+		phase_ = Phase::Circle;
+		count = 1;
+	}
+
+	
+	fireTimer_++;
+	if (fireTimer_ >= kFireInterval) {
+		Fire();
+		fireTimer_ = 0;
+	}
+	for (EnemyBullet* bullet : enemyBullets_) {
+		bullet->Update();
+	}
+	enemyBullets_.remove_if([](EnemyBullet* bullet) {
+		if (bullet->IsDead()) {
+			delete bullet;
+			return true;
+		}
+		return false;
+	});
 
 	worldTransform.UpdateMatrix();
 }
 
 // 描画
 void Enemy::Draw() {
+	for (EnemyBullet* bullet : enemyBullets_) {
+		bullet->Draw();
+	}
 	model_->Draw(worldTransform, *camera_);
 }
 
@@ -88,5 +136,7 @@ void Enemy::InfiniteMove() {
 	worldTransform.translation_.z = 0.0f; // 平面上に固定
 
 }
+
+void Enemy::OnCollision() {};
 
 
