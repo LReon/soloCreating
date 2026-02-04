@@ -8,11 +8,23 @@ using namespace KamataEngine;
 class PlayerBullet {
 
 public:
-	// 初期化
+	
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="camera">ゲームシーンからカメラを受け取る</param>
+	/// <param name="position">初期位置</param>
+	/// <param name="velocity">速度</param>
 	void Initialize(Camera* camera,const Vector3& position,const Vector3& velocity);
-	// 更新
+
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
-	// 描画
+
+	/// <summary>
+	/// 描画
+	/// </summary>
 	void Draw();
 
 	// キーボード入力
@@ -28,9 +40,15 @@ public:
 	// デスフラグ
 	bool isDead_ = false;
 
+	/// <summary>
+	/// 弾の死亡判定
+	/// </summary>
+	/// <returns>弾が死んだらtrueを返す</returns>
 	bool IsDead() const { return isDead_; }
 
-	// 衝突を検出したら呼び出されるコールバック
+	/// <summary>
+	/// 衝突を検出したら呼び出されるコールバック
+	/// </summary>
 	void OnCollision();
 
 private:

@@ -8,11 +8,22 @@ using namespace KamataEngine;
 class EnemyBullet {
 
 public:
-	// 初期化
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="camera">カメラをゲームシーンから受け取る </param>
+	/// <param name="position">弾の初期位置 </param>
+	/// <param name="velocity">弾の速度 </param>
 	void Initialize(Camera* camera, const Vector3& position, const Vector3& velocity);
-	// 更新
+
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
-	// 描画
+
+	/// <summary>
+	/// 描画
+	/// </summary>
 	void Draw();
 
 	// 速度
@@ -25,9 +36,15 @@ public:
 	// デスフラグ
 	bool isDead_ = false;
 
+	/// <summary>
+	/// 弾の死亡判定
+	/// </summary>
+	/// <returns>死んだらtrueを返す</returns>
 	bool IsDead() const { return isDead_; }
 
-	// 衝突を検出したら呼び出されるコールバック
+	/// <summary>
+	/// 衝突を検出したら呼び出されるコールバック
+	/// </summary>
 	void OnCollision();
 
 private:
