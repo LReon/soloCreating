@@ -74,13 +74,13 @@ public:
 	float infiniteTime = 0.0f;
 	float a = 10.0f; // 軌道のサイズ
 
-	int enemyFlag = 1;
+	int32_t enemyFlag = 1;
 		
 
 	// キーボード入力
 	Input* input_ = nullptr;
 
-	int count = 1;
+	int32_t count = 1;
 
 	/// <summary>
 	/// 衝突を検出したら呼び出されるコールバック
