@@ -50,6 +50,7 @@ void Enemy::Update() {
 
 	}
 
+	// フェーズ切り替え用カウント
 	if (input_->GetInstance()->TriggerKey(DIK_TAB)) {
 		count++;
 	}
@@ -65,7 +66,7 @@ void Enemy::Update() {
 		count = 1;
 	}
 
-	
+	// 弾発射処理
 	fireTimer_++;
 	if (fireTimer_ >= kFireInterval) {
 		Fire();
