@@ -5,19 +5,19 @@
 
 
 void Player::Initialize(Camera* camera) {
+	// プレイヤーモデルの生成
 	model_ = Model::Create();
+	// 入力の取得
 	input_ = Input::GetInstance();
+	// ワールド変換の初期化
 	worldTransform.Initialize();
-	camera_ = camera;
-	
-
+	// カメラの設定
+	camera_ = camera;              
 }
 
 void Player::Attack() {
-	
 
-	
-
+	// スペースキーが押されたら弾を発射
 	if (input_->TriggerKey(DIK_SPACE)) {
 		// 弾の速度
 		const float kBulletSpeed = 1.0f;
@@ -31,6 +31,7 @@ void Player::Attack() {
 
 void Player::Update() {
 
+	// WASDキーで移動
 	if (input_->PushKey(DIK_W)) {
 		worldTransform.translation_.y += 1.0f;
 	}
@@ -43,11 +44,16 @@ void Player::Update() {
 	if (input_->PushKey(DIK_D)) {
 		worldTransform.translation_.x += 1.0f;
 	}
+
+	// 攻撃処理
 	Attack();
+
+	// 弾の更新
 	for (PlayerBullet* bullet : playerBullets_) {
 		bullet->Update();
 	}
 
+	// 死んだ弾の削除
 	playerBullets_.remove_if([](PlayerBullet* bullet) {
 		if (bullet->IsDead()) {
 			delete bullet;
@@ -56,10 +62,12 @@ void Player::Update() {
 		return false;
 	});
 
+	// ワールド行列の更新
 	worldTransform.UpdateMatrix();
 }
 
-void Player::Draw() { 
+void Player::Draw() {
+	// プレイヤーの描画
 	model_->Draw(worldTransform, *camera_); 
 	for (PlayerBullet* bullet : playerBullets_) {
 		bullet->Draw();
@@ -69,5 +77,6 @@ void Player::Draw() {
 void Player::OnCollision() {}
 
 Player::~Player() {
-
-	delete playerBullet_; }
+	// 弾の解放
+	delete playerBullet_; 
+}

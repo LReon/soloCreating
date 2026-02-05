@@ -1,9 +1,9 @@
 #pragma once
-#include <KamataEngine.h>
+
 #include <list>
 #include "PlayerBullet.h"
 
-using namespace KamataEngine;
+
 
 /// <summary>
 /// プレイヤーの動きを司るクラス
@@ -55,8 +55,10 @@ public:
 	
 
 private:
+	// ワールド変換データ
 	WorldTransform worldTransform;
 
+	// モデル
 	Model* model_ = nullptr;
 
 	// カメラ

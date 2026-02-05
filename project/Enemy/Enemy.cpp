@@ -96,14 +96,14 @@ void Enemy::Draw() {
 // 円運動
 void Enemy::CircleMove() {
 
-	theta += angleStep;
+	theta += angleStep; // 角度を更新
 
-	if (theta > 2.0f * float(M_PI)) {
-	    theta -= 2.0f * float(M_PI);
+	if (theta > 2.0f * float(M_PI)) { 
+		theta -= 2.0f * float(M_PI);
 	}
 
-	worldTransform.translation_.x = centerX + radius * cosf(theta);
-	worldTransform.translation_.y = centerY + radius * sinf(theta);
+	worldTransform.translation_.x = centerX + radius * cosf(theta); // X座標の計算
+	worldTransform.translation_.y = centerY + radius * sinf(theta); // Y座標の計算
 
 }
 
@@ -112,25 +112,25 @@ void Enemy::UpDownMove() {
 
 	worldTransform.translation_.x = 20.0f; // X座標は固定
 
-	// 時間を加算（フレームごとに少しずつ進める）
+	// 時間を加算
 	moveTime += 1.0f / 60.0f;
 
-	// サイン波でY座標を上下に変化させる
+	// Y座標を上下に変化させる
 	worldTransform.translation_.y = amplitude * sinf(2.0f * static_cast<float>(M_PI) * frequency * moveTime);
 
 }
 
-// 無限大軌道運動
+// 無限運動
 void Enemy::InfiniteMove() {
 
 	// 初期化時の中心座標
 	Vector3 center = {20.0f, 0.0f, 0.0f};
 	
-	infiniteTime += 0.05f; // 時間を進める（速度調整）
+	infiniteTime += 0.05f; // 速度調整
 
 	a = 15.0f; // 軌道のサイズ
 
-	// 無限大軌道（8の字）
+	// 八の字運動の計算
 	worldTransform.translation_.x = center.x + a * sin(infiniteTime);
 	worldTransform.translation_.y = center.y + a * sin(infiniteTime) * cos(infiniteTime);
 	worldTransform.translation_.z = 0.0f; // 平面上に固定

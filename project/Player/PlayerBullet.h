@@ -52,8 +52,10 @@ public:
 	void OnCollision();
 
 private:
+	// ワールド変換データ
 	WorldTransform worldTransform;
 
+	// モデル
 	Model* model_ = nullptr;
 
 	// カメラ
