@@ -66,6 +66,7 @@ void Enemy::Update() {
 		count = 1;
 	}
 
+
 	// 弾発射処理
 	fireTimer_++;
 	if (fireTimer_ >= kFireInterval) {
