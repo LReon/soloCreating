@@ -74,25 +74,33 @@ public:
 	float infiniteTime = 0.0f;
 	float a = 10.0f; // 軌道のサイズ
 
-	int32_t enemyFlag = 1;
+	
 		
 
-	// キーボード入力
-	Input* input_ = nullptr;
-
-	int32_t count = 1;
+	
 
 	/// <summary>
 	/// 衝突を検出したら呼び出されるコールバック
 	/// </summary>
-	void OnCollision();
+	
 	// 弾リストを取得
-	/*const std::list<PlayerBullet*>& GetBullets() const {
-		return enemyBullets_;;
-	}*/
+	const std::list<EnemyBullet*>& GetBullets() const { return enemyBullets_; }
 
-private:
+	float radius_ = 2.0f;
+	int32_t hp = 100;
+
+	bool isDead_ = false;
+	bool IsDead() const { return isDead_; }
+	void OnCollision() { 
+		hp -= 10;
+		if (hp <= 0) {
+			isDead_ = true;
+			
+		}
+	}
+
 	WorldTransform worldTransform;
+private:
 
 	Model* model_ = nullptr;
 

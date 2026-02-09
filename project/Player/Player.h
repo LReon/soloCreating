@@ -40,7 +40,7 @@ public:
 	/// <summary>
 	/// 衝突を検出したら呼び出されるコールバック
 	/// </summary>
-	void OnCollision();
+	
 
 	/// <summary>
 	/// 弾のリストを取得
@@ -53,10 +53,17 @@ public:
 	/// </summary>
 	~Player();
 	
+	float radius_ = 1.0f;
 
-private:
+	bool isDead_ = false;
+	bool IsDead() const { return isDead_; }
+	void OnCollision() {
+		isDead_ = true; // 必要ならアニメーションやSEなど 
+	}
+
 	// ワールド変換データ
 	WorldTransform worldTransform;
+private:
 
 	// モデル
 	Model* model_ = nullptr;

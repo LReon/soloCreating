@@ -6,7 +6,7 @@
 
 void Player::Initialize(Camera* camera) {
 	// プレイヤーモデルの生成
-	model_ = Model::Create();
+	model_ = Model::CreateFromOBJ("player", true);
 	// 入力の取得
 	input_ = Input::GetInstance();
 	// ワールド変換の初期化
@@ -18,7 +18,7 @@ void Player::Initialize(Camera* camera) {
 void Player::Attack() {
 
 	// スペースキーが押されたら弾を発射
-	if (input_->TriggerKey(DIK_SPACE)) {
+	if (input_->GetInstance()->TriggerKey(DIK_SPACE)) {
 		// 弾の速度
 		const float kBulletSpeed = 1.0f;
 		Vector3 velocity(kBulletSpeed, 0, 0);
@@ -32,16 +32,16 @@ void Player::Attack() {
 void Player::Update() {
 
 	// WASDキーで移動
-	if (input_->PushKey(DIK_W)) {
+	if (input_->GetInstance()->PushKey(DIK_W)) {
 		worldTransform.translation_.y += 1.0f;
 	}
-	if (input_->PushKey(DIK_S)) {
+	if (input_->GetInstance()->PushKey(DIK_S)) {
 		worldTransform.translation_.y -= 1.0f;
 	}
-	if (input_->PushKey(DIK_A)) {
+	if (input_->GetInstance()->PushKey(DIK_A)) {
 		worldTransform.translation_.x -= 1.0f;
 	}
-	if (input_->PushKey(DIK_D)) {
+	if (input_->GetInstance()->PushKey(DIK_D)) {
 		worldTransform.translation_.x += 1.0f;
 	}
 
@@ -74,9 +74,11 @@ void Player::Draw() {
 	}
 }
 
-void Player::OnCollision() {}
+
 
 Player::~Player() {
 	// 弾の解放
 	delete playerBullet_; 
 }
+
+

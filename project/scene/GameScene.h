@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "SkyDome.h"
+#include "EnemyBullet.h"
 
 using namespace KamataEngine;
 
@@ -27,10 +28,26 @@ public:
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// 衝突判定と応答
+	/// </summary>
+	
+	bool IsCircleCollision(const Vector3& posA, float radiusA, const Vector3& posB, float radiusB);
+	
+	void PlayerBulletEnemyCollision();
+
+	void EnemyBulletPlayerCollision();
+
+	// 終了フラグ
+	bool finished_ = false;
+	// デスフラグのgetter
+	bool IsFinished() const { return finished_; }
+
 private:
 	Player* player_;
 	Enemy* enemy_;
 	SkyDome* skyDome_;
+	EnemyBullet* enemyBullet_;
 
 	// ワールド変換データ
 	WorldTransform worldTransform_;

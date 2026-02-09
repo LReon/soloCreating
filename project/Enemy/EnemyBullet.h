@@ -47,8 +47,10 @@ public:
 	/// </summary>
 	void OnCollision();
 
-private:
+	float radius_ = 1.0f;
+
 	WorldTransform worldTransform;
+private:
 
 	Model* model_ = nullptr;
 

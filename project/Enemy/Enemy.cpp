@@ -6,8 +6,8 @@
 
 // 初期化
 void Enemy::Initialize(Camera* camera) {
-	model_ = Model::Create();
-	input_ = Input::GetInstance();
+	model_ = Model::CreateFromOBJ("enemy", true);
+	
 	worldTransform.Initialize();
 	worldTransform.scale_.x += 2.0f;
 	worldTransform.scale_.y += 2.0f;
@@ -51,19 +51,13 @@ void Enemy::Update() {
 	}
 
 	// フェーズ切り替え用カウント
-	if (input_->GetInstance()->TriggerKey(DIK_TAB)) {
-		count++;
-	}
-	
-	if (count == 2) {
+	if (hp <= 70 && hp >= 40) {
 		phase_ = Phase::UpDown;
+	
 	}
-	if (count == 3) {
+	else if (hp <= 30) {
 		phase_ = Phase::Infinite;
-	}
-	if (count == 4) {
-		phase_ = Phase::Circle;
-		count = 1;
+		
 	}
 
 
@@ -139,6 +133,8 @@ void Enemy::InfiniteMove() {
 
 }
 
-void Enemy::OnCollision() {};
+
+
+
 
 

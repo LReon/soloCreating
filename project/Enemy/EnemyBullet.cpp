@@ -1,7 +1,7 @@
 #include "EnemyBullet.h"
 
 void EnemyBullet::Initialize(Camera* camera, const Vector3& position, const Vector3& velocity) {
-	model_ = Model::Create();
+	model_ = Model::CreateFromOBJ("enemyBullet", true);
 	velocity_ = velocity;
 	worldTransform.Initialize();
 	worldTransform.translation_ = position;
@@ -24,3 +24,5 @@ void EnemyBullet::Draw() {
 
 void EnemyBullet::OnCollision() {
 	isDead_ = true; }
+
+

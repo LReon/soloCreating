@@ -35,3 +35,4 @@ void PlayerBullet::Draw() {
 void PlayerBullet::OnCollision() {
 	isDead_ = true; // 衝突時に弾を消す
 }
+

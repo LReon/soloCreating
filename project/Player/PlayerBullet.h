@@ -51,9 +51,11 @@ public:
 	/// </summary>
 	void OnCollision();
 
-private:
+	
+	float radius_ = 1.0f;
 	// ワールド変換データ
 	WorldTransform worldTransform;
+private:
 
 	// モデル
 	Model* model_ = nullptr;
