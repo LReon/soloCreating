@@ -17,6 +17,8 @@ void GameScene::Initialize() {
 	skyDome_ = new SkyDome();
 	skyDome_->Initialize(camera_);
 
+	textureHandle_ = TextureManager::Load("number.png");
+	model_ = Model::Create();
 }
 
 // 更新
@@ -45,6 +47,8 @@ void GameScene::Draw() {
 	if (enemy_->isDead_ == false) {
 		enemy_->Draw();
 	}
+
+	model_->Draw(worldTransform_, *camera_, textureHandle_);
 	Model::PostDraw();
 }
 

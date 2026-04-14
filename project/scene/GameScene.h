@@ -54,6 +54,8 @@ private:
 	// モデル
 	uint32_t textureHandle_ = 0;
 
+	Model* model_ = nullptr;
+
 	// カメラ
 	Camera* camera_;
 };

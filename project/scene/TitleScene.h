@@ -21,6 +21,8 @@ public:
 	/// </summary>
 	void Draw();
 
+	~TitleScene();
+
 	// 終了フラグ
 	bool finished_ = false;
 	// デスフラグのgetter
@@ -30,8 +32,6 @@ public:
 
 private:
 
-	/*uint32_t textureHandle_ = 0;
-	Sprite* sprite_;*/
-
+	
 
 };
